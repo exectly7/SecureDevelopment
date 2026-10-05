@@ -14,3 +14,9 @@
 | [T-08](threats/T-08.md) | High |
 | [T-09](threats/T-09.md) | High |
 | [T-10](threats/T-10.md) | Medium |
+
+## Архитектура
+
+![Архитектура продукта](architecture/diagram.png)
+
+[Исходник диаграммы](architecture/diagram.drawio)
