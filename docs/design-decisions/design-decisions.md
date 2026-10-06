@@ -20,7 +20,7 @@
 
 | Угроза | Требования безопасности | Проектное решение | Будущая проверка |
 |---|---|---|---|
-| [T-01](../threat-model/threats/T-01.md) | [SR-AUTH-01](../security-requirements/auth/SR-AUTH-01.md) | [D-06](D-06.md) | [Проверка подтверждения почты](D-06.md) |
+| [T-01](../threat-model/threats/T-01.md) | [SR-AUTH-01](../security-requirements/auth/SR-AUTH-01.md), [SR-AUTH-03](../security-requirements/auth/SR-AUTH-03.md) | [D-06](D-06.md) | [Проверка подтверждения почты](D-06.md) |
 | [T-04](../threat-model/threats/T-04.md) | [SR-AUTH-04](../security-requirements/auth/SR-AUTH-04.md), [SR-CLIENT-08](../security-requirements/client/SR-CLIENT-08.md), [SR-REPAIR-05](../security-requirements/repair/SR-REPAIR-05.md) | [D-02](D-02.md) | [Проверка доступа к чужой заявке](D-02.md) |
 | [T-07](../threat-model/threats/T-07.md) | [SR-AUTH-05](../security-requirements/auth/SR-AUTH-05.md), [SR-REPAIR-02](../security-requirements/repair/SR-REPAIR-02.md), [SR-REPAIR-03](../security-requirements/repair/SR-REPAIR-03.md), [SR-REPAIR-04](../security-requirements/repair/SR-REPAIR-04.md) | [D-07](D-07.md) | [Проверка матрицы полномочий](D-07.md) |
 | [T-08](../threat-model/threats/T-08.md) | [SR-CLIENT-09](../security-requirements/client/SR-CLIENT-09.md), [SR-REPAIR-07](../security-requirements/repair/SR-REPAIR-07.md), [SR-REPAIR-09](../security-requirements/repair/SR-REPAIR-09.md) | [D-04](D-04.md) | [Проверка версии условий и конкурентных запросов](D-04.md) |
