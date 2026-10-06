@@ -1,0 +1,10 @@
+**
+!src/
+!src/dedus/
+!src/dedus/build.gradle
+!src/dedus/settings.gradle
+!src/dedus/gradlew
+!src/dedus/gradle/
+!src/dedus/gradle/**
+!src/dedus/src/
+!src/dedus/src/**
