@@ -2,7 +2,7 @@
 .idea
 .gradle
 dedus.iml
-@@ -0,0 +1,37 @@
+.env
 HELP.md
 .gradle
 build/
