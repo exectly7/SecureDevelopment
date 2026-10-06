@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register", "/api/auth/ping").permitAll()
-                        .anyRequest().denyAll()
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
