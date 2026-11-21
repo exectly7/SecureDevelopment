@@ -5,6 +5,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class AuthService {
 
@@ -27,6 +29,25 @@ public class AuthService {
         }
         User user = new User(request.email(), passwordEncoder.encode(request.password()));
         userRepository.save(user);
+
+        String token = jwtService.createToken(user);
+
+        return new AuthResponse(
+                token,
+                TOKEN_TYPE,
+                jwtService.getExpirationSeconds()
+        );
+    }
+
+    @Transactional
+    public AuthResponse login(LoginRequest request) {
+        if (!userRepository.existsByEmail(request.email())) {
+            throw new EmailAlreadyInUseException();
+        }
+        User user = userRepository.findByEmail(request.email());
+        if (!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
+            throw new InvalidPasswordException();
+        }
 
         String token = jwtService.createToken(user);
 
