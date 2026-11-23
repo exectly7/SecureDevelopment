@@ -1,6 +1,10 @@
 package com.example.dedus.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -16,11 +20,22 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", nullable = false),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role"})
+    )
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Set<UserRole> roles = new HashSet<>();
+
     protected User() {}
 
     public User(String email, String passwordHash) {
         this.email = email;
         this.passwordHash = passwordHash;
+        this.roles.add(UserRole.CLIENT);
     }
 
     public Long getId() {
@@ -33,5 +48,17 @@ public class User {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public Set<UserRole> getRole() {
+        return Set.copyOf(roles);
+    }
+
+    public void addRole(UserRole role) {
+        this.roles.add(role);
+    }
+
+    public void removeRole(UserRole role) {
+        this.roles.remove(role);
     }
 }
