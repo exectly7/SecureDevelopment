@@ -1,7 +1,7 @@
 import {type SubmitEvent, useState} from "react";
-import useRegister from "../../../../hooks/auth/useRegister.ts";
 import {Link, useNavigate} from "react-router";
 import AuthFormField from "../AuthFormField.tsx";
+import useLogin from "../../../../hooks/auth/useLogin.ts";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ export default function LoginForm() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const {submit, state} = useRegister();
+    const {submit, state} = useLogin();
     const navigate = useNavigate();
 
     async function handleRegister(event: SubmitEvent<HTMLFormElement>) {
@@ -22,7 +22,7 @@ export default function LoginForm() {
         let isSuccessful = await submit({email, password});
 
         if (isSuccessful) {
-            navigate('/code', { replace: true })
+            navigate('/', { replace: true })
         }
     }
 
