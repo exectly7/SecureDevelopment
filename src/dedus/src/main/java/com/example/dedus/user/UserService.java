@@ -1,6 +1,6 @@
 package com.example.dedus.user;
 
-import com.example.dedus.auth.UserNotFoundException;
+import com.example.dedus.auth.exeption.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
