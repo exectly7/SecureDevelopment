@@ -1,0 +1,8 @@
+.footer {
+    border-top: 1px solid var(--color-neutral);
+    padding: 2rem 4rem;
+}
+
+.footer__rights-label {
+    color: var(--color-text-muted);
+}
