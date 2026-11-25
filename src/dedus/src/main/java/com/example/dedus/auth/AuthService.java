@@ -28,6 +28,8 @@ public class AuthService {
     private final EmailVerificationCodeRepository emailVerificationCodeRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private static final long CODE_LIFETIME_SECONDS = 600;
+    private static final long RESEND_COOLDOWN_SECONDS = 60;
 
     public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService,
                        EmailVerificationCodeRepository emailVerificationCodeRepository) {
@@ -100,6 +102,47 @@ public class AuthService {
 
         user.markEmailVerified();
         emailVerificationCodeRepository.delete(code);
+    }
+
+    @Transactional
+    public void resendVerificationCode(LoginRequest request) {
+        User user = userRepository.findByEmailForUpdate(request.email()).orElse(null);
+        if (user == null || user.isEmailVerified()
+                || !passwordEncoder.matches(request.password(), user.getPasswordHash())) {
+            return;
+        }
+
+        var currentCode = emailVerificationCodeRepository.findById(user.getId()).orElse(null);
+        Instant now = Instant.now();
+
+        if (currentCode != null) {
+            Instant nextAllowedAt = currentCode.getExpiresAt()
+                    .minusSeconds(CODE_LIFETIME_SECONDS)
+                    .plusSeconds(RESEND_COOLDOWN_SECONDS);
+
+            if (now.isBefore(nextAllowedAt)) {
+                return;
+            }
+        }
+
+        issueVerificationCode(user, currentCode, now);
+    }
+
+    private void issueVerificationCode(User user, EmailVerificationCode currentCode, Instant now) {
+        String rawCode;
+        do {
+            rawCode = String.format(Locale.ROOT, "%06d", CODE_RANDOM.nextInt(1_000_000));
+        } while (currentCode != null
+                && passwordEncoder.matches(rawCode, currentCode.getCodeHash()));
+
+        String codeHash = passwordEncoder.encode(rawCode);
+        Instant expiresAt = now.plusSeconds(CODE_LIFETIME_SECONDS);
+
+        if (currentCode == null) {
+            emailVerificationCodeRepository.save(new EmailVerificationCode(user, codeHash, expiresAt));
+        } else {
+            currentCode.replaceCode(codeHash, expiresAt);
+        }
     }
 
 }

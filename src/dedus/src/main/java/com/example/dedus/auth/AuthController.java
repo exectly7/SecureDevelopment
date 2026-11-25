@@ -38,4 +38,10 @@ public class AuthController {
     public void verifyEmail(@Valid @RequestBody VerifyEmailRequest request) {
         authService.verifyEmail(request);
     }
+
+    @PostMapping("/resend-verification-code")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void resendVerificationCode(@Valid @RequestBody LoginRequest request) {
+        authService.resendVerificationCode(request);
+    }
 }

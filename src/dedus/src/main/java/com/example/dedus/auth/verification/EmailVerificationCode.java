@@ -50,4 +50,10 @@ public class EmailVerificationCode {
     public void recordFailedAttempt() {
         failedAttempts++;
     }
+
+    public void replaceCode(String codeHash, Instant expiresAt) {
+        this.codeHash = codeHash;
+        this.expiresAt = expiresAt;
+        this.failedAttempts = 0;
+    }
 }
