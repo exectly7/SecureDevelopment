@@ -1,9 +1,15 @@
 import CodeForm from "../../components/auth/forms/code/CodeForm.tsx";
-import {useSearchParams} from "react-router";
+import {useNavigate, useSearchParams} from "react-router";
 
 export default function CodePage() {
+    const navigate = useNavigate();
+
     const [searchParams] = useSearchParams();
     const email = searchParams.get('email');
+
+    if (!email) {
+        navigate('/');
+    }
 
     return (
         <>
