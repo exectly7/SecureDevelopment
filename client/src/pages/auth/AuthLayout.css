@@ -38,12 +38,17 @@
         min-width: 0;
         box-sizing: border-box;
     }
+}
 
 .auth-layout__back-link {
     color: var(--color-on-primary);
     text-decoration: none;
 
     align-self: flex-start;
+    display: inline-flex;
+
+    align-items: center;
+    gap: 0.125rem;
 }
 
 .auth-layout__back-link:hover {
