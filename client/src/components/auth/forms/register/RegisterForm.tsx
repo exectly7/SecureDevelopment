@@ -30,7 +30,8 @@ export default function RegisterForm() {
         let isSuccessful = await submit({email, password});
 
         if (isSuccessful) {
-            navigate('/code', { replace: true })
+            const query = new URLSearchParams({email});
+            navigate(`/code?${query}`, { replace: true });
         }
     }
 
