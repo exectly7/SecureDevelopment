@@ -20,6 +20,9 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified = false;
+
     @ElementCollection
     @CollectionTable(
             name = "user_roles",
@@ -60,5 +63,13 @@ public class User {
 
     public void removeRole(UserRole role) {
         this.roles.remove(role);
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void markEmailVerified() {
+        this.emailVerified = true;
     }
 }

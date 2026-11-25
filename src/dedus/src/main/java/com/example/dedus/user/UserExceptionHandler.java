@@ -1,6 +1,6 @@
 package com.example.dedus.user;
 
-import com.example.dedus.auth.UserNotFoundException;
+import com.example.dedus.auth.exeption.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
