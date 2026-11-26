@@ -1,4 +1,4 @@
-package com.example.dedus.auth;
+package com.example.dedus.auth.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

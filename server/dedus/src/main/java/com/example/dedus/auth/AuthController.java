@@ -1,11 +1,11 @@
 package com.example.dedus.auth;
 
+import com.example.dedus.auth.request.LoginRequest;
+import com.example.dedus.auth.request.RegisterRequest;
+import com.example.dedus.auth.request.VerifyEmailRequest;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,12 +23,25 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthResponse register(@Valid @RequestBody RegisterRequest request) {
-        return authService.register(request);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void register(@Valid @RequestBody RegisterRequest request) {
+        authService.register(request);
     }
 
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/verify-email")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void verifyEmail(@Valid @RequestBody VerifyEmailRequest request) {
+        authService.verifyEmail(request);
+    }
+
+    @PostMapping("/resend-verification-code")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void resendVerificationCode(@Valid @RequestBody LoginRequest request) {
+        authService.resendVerificationCode(request);
     }
 }
