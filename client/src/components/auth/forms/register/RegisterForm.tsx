@@ -37,7 +37,7 @@ export default function RegisterForm() {
 
     return (
         <form className="auth-form" onSubmit={handleRegister}>
-            <AuthFormField value={email} setValue={setEmail} label="Электронная почта"></AuthFormField>
+            <AuthFormField value={email} setValue={setEmail} label="Электронная почта" type="email"></AuthFormField>
 
             <RegisterPasswordInput password={password} passwordRepeat={passwordRepeat} setPassword={setPassword}
                                    setPasswordRepeat={setPasswordRepeat} showPassword={showPasswords}/>

@@ -2,6 +2,7 @@ import {type SubmitEvent, useState} from "react";
 import {Link, useNavigate} from "react-router";
 import AuthFormField from "../AuthFormField.tsx";
 import useLogin from "../../../../hooks/auth/useLogin.ts";
+import "../AuthForm.css";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ export default function LoginForm() {
 
     return (
         <form className="auth-form" onSubmit={handleRegister}>
-            <AuthFormField value={email} setValue={setEmail} label="Электронная почта"></AuthFormField>
+            <AuthFormField value={email} setValue={setEmail} label="Электронная почта" type="email"></AuthFormField>
 
             <AuthFormField value={password} setValue={setPassword} label="Пароль" type={showPassword ? "text" : "password"}/>
 

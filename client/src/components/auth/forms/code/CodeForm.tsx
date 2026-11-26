@@ -1,5 +1,6 @@
 import {useState} from "react";
 import CodeInput from "./CodeInput.tsx";
+import "../AuthForm.css";
 
 export default function CodeForm({email}: { email: string }) {
     const [code, setCode] = useState("");
