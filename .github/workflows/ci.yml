@@ -35,7 +35,7 @@ jobs:
           java-version: '21'
 
       - name: Build and test
-        working-directory: src/dedus
+        working-directory: server/dedus
         env:
           DB_HOST: localhost
           DB_PORT: '5432'
@@ -46,3 +46,22 @@ jobs:
           JWT_SECRET: 'MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY='
           JWT_EXPIRATION_SECONDS: '3600'
         run: ./gradlew --no-daemon build
+
+  client:
+    runs-on: ubuntu-24.04
+
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - run: npm ci
+      - run: npm run build

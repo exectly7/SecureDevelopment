@@ -2,10 +2,10 @@
 FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /workspace
 
-COPY src/dedus/gradlew src/dedus/build.gradle src/dedus/settings.gradle ./
-COPY src/dedus/gradle ./gradle
+COPY server/dedus/gradlew server/dedus/build.gradle server/dedus/settings.gradle ./
+COPY server/dedus/gradle ./gradle
 RUN chmod +x gradlew
-COPY src/dedus/src ./src
+COPY server/dedus/src ./src
 RUN --mount=type=cache,target=/root/.gradle ./gradlew --no-daemon bootJar \
     && cp build/libs/*.jar /workspace/app.jar
 

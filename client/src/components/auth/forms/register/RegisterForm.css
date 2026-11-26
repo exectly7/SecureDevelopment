@@ -1,0 +1,14 @@
+.register-form__error-label {
+    font-size: var(--text-sm);
+    color: var(--color-error);
+}
+
+.register-form__correct-label {
+    font-size: var(--text-sm);
+    color: var(--color-correct);
+}
+
+.register-form__check-block {
+    display: flex;
+    flex-direction: column;
+}
